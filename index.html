@@ -146,4 +146,8 @@ document.addEventListener("click",function(event){var choice=event.target.closes
 /* Pawn selection proceeds to the recommended Special deck step. */
 var baseRenderPawns=renderPawns;renderPawns=function(){baseRenderPawns();document.querySelectorAll(".pawn-choice").forEach(function(button,index){button.onclick=function(){var pawn=pawns[index];selectedPawn=pawn.id;localStorage.setItem("bs01-selected-pawn",selectedPawn);renderPawns();updatePawnGate();document.getElementById("specialWorkspace").scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}})};renderPawns();document.getElementById("language").addEventListener("change",renderPawns);
 </script>
+<script>
+function scrollToSpecialDeck(){var target=document.getElementById("specialWorkspace"),start=window.scrollY,end=Math.max(0,Math.min(start+target.getBoundingClientRect().top,document.documentElement.scrollHeight-window.innerHeight));if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){window.scrollTo(0,end);return}var started=performance.now(),duration=500;function frame(now){var progress=Math.min(1,(now-started)/duration),eased=1-Math.pow(1-progress,3);window.scrollTo(0,start+(end-start)*eased);if(progress<1)requestAnimationFrame(frame)}requestAnimationFrame(frame)}
+var smoothPawnRender=renderPawns;renderPawns=function(){smoothPawnRender();document.querySelectorAll(".pawn-choice").forEach(function(button,index){button.onclick=function(){var pawn=pawns[index];selectedPawn=pawn.id;localStorage.setItem("bs01-selected-pawn",selectedPawn);renderPawns();updatePawnGate();scrollToSpecialDeck()}})};renderPawns();document.getElementById("language").addEventListener("change",renderPawns);
+</script>
 </body></html>
