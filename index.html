@@ -142,4 +142,8 @@ var specialDisplayRender=renderSpecials;renderSpecials=function(){specialDisplay
 /* A new pawn starts with a fresh Special deck; re-selecting the same pawn preserves it. */
 document.addEventListener("click",function(event){var choice=event.target.closest(".pawn-choice"),previousPawn=selectedPawn;if(!choice)return;setTimeout(function(){if(selectedPawn!==previousPawn){specialDeck.cards={};localStorage.setItem("bs01-special-deck-v1",JSON.stringify(specialDeck));renderSpecials()}},0)},true);
 </script>
+<script>
+/* Pawn selection proceeds to the recommended Special deck step. */
+var baseRenderPawns=renderPawns;renderPawns=function(){baseRenderPawns();document.querySelectorAll(".pawn-choice").forEach(function(button,index){button.onclick=function(){var pawn=pawns[index];selectedPawn=pawn.id;localStorage.setItem("bs01-selected-pawn",selectedPawn);renderPawns();updatePawnGate();document.getElementById("specialWorkspace").scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}})};renderPawns();document.getElementById("language").addEventListener("change",renderPawns);
+</script>
 </body></html>
