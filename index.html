@@ -111,18 +111,15 @@ function requireCompleteDeck(){if(total()===20)return true;var message=language=
 function updateDeckCompletion(){document.getElementById("deckPanel").classList.toggle("is-complete",total()===20)}
 var deckRender=render;render=function(){deckRender();updateDeckCompletion()};render();
 var SPECIAL_CARDS=[
-  {id:"SS01-001",initial:"FD",name:"\uc2a4\ud15d\uc5c5",enName:"Step Up",stack:2,image:"assets/specials/special-001.png"},
-  {id:"SS01-016",initial:"FD",name:"\ucf54\uc77c \ud53c\uc5b4\uc2a4",enName:"Coil Pierce",stack:1,image:"assets/specials/special-002.png"},
-  {id:"SS01-006",initial:"Cd",name:"\uc804\ubd80 \ubd80\uc26c\uc8fc\uc9c0",enName:"Smash Everything",stack:1,image:"assets/specials/special-003.png"},
-  {id:"SS01-002",initial:"FD",name:"\ubd88\uc744 \ud0dc\uc6b0\ub294 \ubd88",enName:"Fire That Burns Fire",stack:1,image:"assets/specials/special-004.png"},
-  {id:"SS01-005",initial:"Cd",name:"\ub0a0\uac1c\ub97c \ud3bc\uccd0",enName:"Spread Your Wings",stack:2,image:"assets/specials/special-005.png"},
-  {id:"SS01-007",initial:"Cd",name:"\ub514\uc878\ub8e8\uc158 \ube0c\ub808\uc2a4",enName:"Dissolution Breath",stack:0,image:"assets/specials/special-006.png"},
-  {id:"SS01-009",initial:"Cd",name:"\uadf8\ub79c\ub4dc \uc2ac\ub7a8",enName:"Grand Slam",stack:0,image:"assets/specials/special-007.png"},
-  {id:"SS01-011",initial:"Cd",name:"\ucc9c\uc7a5\uc774 \ub0ae\uc740\ub370?",enName:"Low Ceiling?",stack:1,image:"assets/specials/special-008.png"},
-  {id:"SS01-013",initial:"FD",name:"\uc804\uc790\uae30\ubd80\uc0c1",enName:"Magnetic Levitation",stack:2,image:"assets/specials/special-009.png"},
-  {id:"SS01-014",initial:"FD",name:"\uc5d0\ud074\ub808\ub974 \uc775\uc2a4\ud50c\ub85c",enName:"Eclair Explo",stack:0,image:"assets/specials/special-010.png"},
-  {id:"SS01-003",initial:"FD",name:"\uc5d8\ub808\uac15\ud2b8 \ub77c\uc2a4\uc544\ub974",enName:"Elegant Rasaar",stack:0,image:"assets/specials/special-011.png"},
-  {id:"SS01-004",initial:"FD",name:"\ub053\uc5b4\uc624\ub974\ub294 \ud22c\uc9c0",enName:"Rising Fighting Spirit",stack:0,image:"assets/specials/special-012.png"}
+  {id:"SS01-001",initial:"FD",name:"\uc2a4\ud15d\uc5c5",enName:"Step Up",stack:1,stacks:["flame"],image:"assets/specials/special-001.png"},
+  {id:"SS01-002",initial:"FD",name:"\ubd88\uc744 \ud0dc\uc6b0\ub294 \ubd88",enName:"Fire That Burns Fire",stack:3,stacks:["flame","flame","any"],image:"assets/specials/special-004.png"},
+  {id:"SS01-003",initial:"FD",name:"\uc5d8\ub808\uac15\ud2b8 \ub77c\uc2a4\uc544\ub974",enName:"Elegant Rasaar",stack:5,stacks:["flame","flame","flame","flame","flame"],image:"assets/specials/special-011.png"},
+  {id:"SS01-005",initial:"Cd",name:"\ub0a0\uac1c\ub97c \ud3bc\uccd0",enName:"Spread Your Wings",stack:1,stacks:["nature"],image:"assets/specials/special-005.png"},
+  {id:"SS01-009",initial:"Cd",name:"\uadf8\ub79c\ub4dc \uc2ac\ub7a8",enName:"Grand Slam",stack:5,stacks:["nature","nature","nature","nature","any"],image:"assets/specials/special-007.png"},
+  {id:"SS01-011",initial:"Cd",name:"\ucc9c\uc7a5\uc774 \ub0ae\uc740\ub370?",enName:"Low Ceiling?",stack:3,stacks:["nature","nature","any"],image:"assets/specials/special-008.png"},
+  {id:"SS01-013",initial:"JD",name:"\uc804\uc790\uae30\ubd80\uc0c1",enName:"Magnetic Levitation",stack:1,stacks:["electric"],image:"assets/specials/special-009.png"},
+  {id:"SS01-014",initial:"JD",name:"\uc5d0\ud074\ub808\ub974 \uc775\uc2a4\ud50c\ub85c",enName:"Eclair Explo",stack:5,stacks:["electric","electric","electric","electric","any"],image:"assets/specials/special-010.png"},
+  {id:"SS01-016",initial:"JD",name:"\ucf54\uc77c\ud53c\uc5b4\uc2a4",enName:"Coil Pierce",stack:3,stacks:["electric","electric","any"],image:"assets/specials/special-002.png"}
 ],specialDeck=JSON.parse(localStorage.getItem("bs01-special-deck-v1")||"{\"cards\":{}}");
 function specialName(card){return language==="ko"?card.name:card.enName}
 function specialPawn(){return pawns.find(function(pawn){return pawn.id===selectedPawn})}
