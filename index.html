@@ -96,11 +96,11 @@ document.querySelector('#language option[value="ko"]').textContent="\uD55C\uAD6D
 </script>
 <script>
 var pawns=[
-  {id:"PWO1-DB-001",code:"001",image:"assets/pawns/pawn-001.png"},
-  {id:"PWO1-FB-001",code:"002",image:"assets/pawns/pawn-002.png"},
-  {id:"PWO1-Cd-001",code:"003",image:"assets/pawns/pawn-003.png"}
+  {id:"PWO1-DB-001",code:"001",name:"\uc794 \ub2e4\ub974\ud06c",enName:"Jeanne d'Arc",image:"assets/pawns/pawn-001.png"},
+  {id:"PWO1-FB-001",code:"002",name:"\ud53c\uc5d0\ub974 \ub2e4\ub974\ud06c",enName:"Pierre d'Arc",image:"assets/pawns/pawn-002.png"},
+  {id:"PWO1-Cd-001",code:"003",name:"\uccb4\ub974\ub514\uce58",enName:"Cerdich",image:"assets/pawns/pawn-003.png"}
 ],selectedPawn=localStorage.getItem("bs01-selected-pawn")||"";
-function pawnLabel(pawn){return language==="ko"?"\uD3F0 "+pawn.code:"Pawn "+pawn.code}
+function pawnLabel(pawn){return language==="ko"?pawn.name:pawn.enName}
 function updatePawnGate(){var workspace=document.getElementById("deckWorkspace"),ready=!!selectedPawn;workspace.classList.toggle("is-locked",!ready);workspace.inert=!ready;document.getElementById("pawnStatus").textContent=ready?(language==="ko"?pawnLabel(pawns.find(function(pawn){return pawn.id===selectedPawn}))+"\uc744(\ub97c) \uc120\ud0dd\ud588\uc2b5\ub2c8\ub2e4. \uc774\uc81c \ub371\uc744 \uad6c\uc131\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4.":pawnLabel(pawns.find(function(pawn){return pawn.id===selectedPawn}))+" selected. You can now build your deck."):(language==="ko"?"\ub371 \uad6c\uc131\uc744 \uc2dc\uc791\ud558\ub824\uba74 \ud3f0\uc744 \ud558\ub098 \uc120\ud0dd\ud574 \uc8fc\uc138\uc694.":"Choose a pawn to unlock deck building.")}
 function renderPawns(){var choices=document.getElementById("pawnChoices");choices.innerHTML="";pawns.forEach(function(pawn){var button=document.createElement("button"),image=document.createElement("img"),name=document.createElement("strong"),isSelected=pawn.id===selectedPawn;button.type="button";button.className="pawn-choice";button.setAttribute("aria-pressed",String(isSelected));button.setAttribute("aria-label",pawnLabel(pawn));image.src=pawn.image;image.alt="";name.textContent=pawnLabel(pawn);button.append(image,name);button.onclick=function(){selectedPawn=pawn.id;localStorage.setItem("bs01-selected-pawn",selectedPawn);renderPawns();updatePawnGate();document.getElementById("deck-builder").scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})};choices.append(button)});document.getElementById("pawn-heading").textContent=language==="ko"?"1. \ud3f0 \uc120\ud0dd":"1. Select a pawn";document.getElementById("pawn-intro").textContent=language==="ko"?"\ub371\uc744 \uad6c\uc131\ud558\uae30 \uc804\uc5d0 \ud50c\ub808\uc774\uc5b4\uac00 \uc870\uc791\ud560 \ud3f0\uc744 \uc120\ud0dd\ud574 \uc8fc\uc138\uc694.":"Choose the character you will control before building a deck.";updatePawnGate()}
 renderPawns();document.getElementById("language").addEventListener("change",renderPawns);
