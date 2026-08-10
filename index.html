@@ -121,6 +121,7 @@ var SPECIAL_CARDS=[
   {id:"SS01-014",initial:"JD",name:"\uc5d0\ud074\ub808\ub974 \uc775\uc2a4\ud50c\ub85c",enName:"Eclair Explo",stack:5,stacks:["electric","electric","electric","electric","any"],image:"assets/specials/special-010.png"},
   {id:"SS01-016",initial:"JD",name:"\ucf54\uc77c\ud53c\uc5b4\uc2a4",enName:"Coil Pierce",stack:3,stacks:["electric","electric","any"],image:"assets/specials/special-002.png"}
 ],specialDeck=JSON.parse(localStorage.getItem("bs01-special-deck-v1")||"{\"cards\":{}}");
+SPECIAL_CARDS.sort(function(a,b){return a.stack-b.stack||a.id.localeCompare(b.id)});
 function specialName(card){return language==="ko"?card.name:card.enName}
 function specialPawn(){return pawns.find(function(pawn){return pawn.id===selectedPawn})}
 function selectedSpecials(){return SPECIAL_CARDS.filter(function(card){return specialDeck.cards[card.id]})}
